@@ -1,0 +1,30 @@
+{% extends 'pizza/base.html' %}
+
+{% block content %}
+<div class="container">
+<form method="POST">
+  {% csrf_token %}
+  {% for i in form_ingredient %}
+    <h4><strong>{{i.label}}</strong></h4>
+    {{i}}
+  {% endfor %}
+
+{% for ingredients, title, fs in zipper %}
+  <h4><strong>{{title}}</strong></h4>
+  <div class="row">
+    {{fs.management_form}}
+    {% for input, label, price in ingredients %}
+      <div class="col-3">
+        {{label}} ({{price}}$) {{input}}
+      </div>
+    {% endfor %}
+  </div>
+
+<br>
+
+{% endfor %}
+<button type="submit">Send</button>
+</form>
+</div>
+
+{% endblock %}

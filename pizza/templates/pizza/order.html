@@ -1,0 +1,22 @@
+{% extends "pizza/base.html" %}
+{% block content %}
+<div class="content">
+  <h1>Confirmation Pizza Order</h1>
+  <div class="row">
+
+    <form method="POST" action="{% url 'send-email' url_order=url_order total_price=total_price %}"> {% csrf_token %}
+      <div class="col-3">
+      {% for f in form %}
+        <strong>{{f.label}}:</strong>
+        {{f}}
+
+      {% endfor %}
+      Total price:
+      {{total_price}}
+    </div>
+    <button type="submit" class="ml-3">Send Email</button>
+    </form>
+  </div>
+  </div>
+</div>
+{% endblock %}
