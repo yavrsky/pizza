@@ -5,14 +5,21 @@
   <div class="row">
 
     <form method="POST" action="{% url 'send-email' url_order=url_order total_price=total_price %}"> {% csrf_token %}
-      <div class="col-3">
+      <div class="col-9">
       {% for f in form %}
-        <strong>{{f.label}}:</strong>
+        <strong style="display:block">{{f.label}}:</strong>
         {{f}}
-
+        {% for error in f.errors %}
+        <div class="alert alert-danger">
+            <strong>{{error}}</strong>
+        </div>
+        {% endfor %}
       {% endfor %}
+      <p>
+
       Total price:
       {{total_price}}
+    </p>
     </div>
     <button type="submit" class="ml-3">Send Email</button>
     </form>

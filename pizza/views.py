@@ -109,7 +109,15 @@ def send(request, url_order, total_price):
             person_name = form.cleaned_data['person_name']
             email = form.cleaned_data['email']
         else:
-            return redirect('constructor')
+            for field in form:
+                print(field.errors)
+            print(form.errors)
+            context = {
+                'form': form,
+                'url_order': url_order,
+                'total_price': total_price,
+            }
+            return render(request, 'pizza/order.html', context)
 
 
         utf_decoded = url_encode_decode(url_order)
