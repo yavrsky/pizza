@@ -60,7 +60,6 @@ class Constructor(View):
             iterator = 0
             if form.is_valid():
                 for comp, f in zip(ing.component_set.all(), form.cleaned_data):
-                    print(comp.price, f['number'])
                     url_order += f'{slugify(ing.title)}-{iterator}={comp.price}+{f["number"]}&'
                     iterator += 1
                     total_price += comp.price * float(f['number'])
@@ -109,9 +108,6 @@ def send(request, url_order, total_price):
             person_name = form.cleaned_data['person_name']
             email = form.cleaned_data['email']
         else:
-            for field in form:
-                print(field.errors)
-            print(form.errors)
             context = {
                 'form': form,
                 'url_order': url_order,

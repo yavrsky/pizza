@@ -5,6 +5,7 @@ import re
 
 class ComponentForm(forms.Form):
     number = forms.IntegerField(min_value=0, label='')
+    number.widget.attrs.update(({'class': 'form-control'}))
 
 class IngredientForm(forms.Form):
     obj = Ingredient.objects.get(type='rad')
@@ -18,11 +19,16 @@ class IngredientForm(forms.Form):
         )
 
 
+
+
 class ContactForm(forms.Form):
     person_name = forms.CharField()
     email = forms.EmailField()
     phone_number = forms.CharField()
 
+    person_name.widget.attrs.update(({'class': 'form-control'}))
+    email.widget.attrs.update(({'class': 'form-control'}))
+    phone_number.widget.attrs.update(({'class': 'form-control'}))
     def clean_person_name(self):
         data = self.cleaned_data['person_name']
         if not re.fullmatch(r'[A-Z][a-z]+', data):

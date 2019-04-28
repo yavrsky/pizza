@@ -1,7 +1,7 @@
 {% extends 'pizza/base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
 <form method="POST">
   {% csrf_token %}
   {% for i in form_ingredient %}
@@ -14,8 +14,9 @@
   <div class="row">
     {{fs.management_form}}
     {% for input, label, price in ingredients %}
-      <div class="col-3">
-        {{label}} ({{price}}$) {{input}}
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <p class="label-price">{{label}} ({{price}}$)</p>
+        {{input}}
       </div>
     {% endfor %}
   </div>
@@ -23,7 +24,7 @@
 <br>
 
 {% endfor %}
-<button type="submit">Send</button>
+<button class="btn btn-primary" type="submit">Send</button>
 </form>
 </div>
 
